@@ -944,7 +944,7 @@ pub trait ObjectStore: std::fmt::Display + Send + Sync + Debug + 'static {
 
         let location = location.clone();
         let mut stream =
-            self.delete_stream(futures::stream::once(async move { Ok(location) }).boxed());
+            self.delete_stream(futures_util::stream::once(async move { Ok(location) }).boxed());
         let _path = stream.try_next().await?.ok_or_else(|| Error::Generic {
             store: "ext",
             source: "`delete_stream` with one location should yield once but didn't".into(),
